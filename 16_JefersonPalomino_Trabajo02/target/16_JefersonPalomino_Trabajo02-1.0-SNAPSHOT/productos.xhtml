@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+    <h:head>
+        <title>Demo</title>
+        <f:event listener="#{ProductoC.listar()}" type="preRenderView"/>
+    </h:head>
+    <h:body >
+        <p:growl id="mensaje" severity="info, error" showDetail="true" showSummary="true" />
+
+        <div class="card">
+            <p:tabMenu activeIndex="#{param.i}">
+                <p:menuitem value="Home" outcome="inicio.xhtml" icon="pi pi-fw pi-home">
+                    <f:param name="i" value="0"/>
+                </p:menuitem>
+                <p:menuitem value="Productos" outcome="productos.xhtml" icon="pi pi-fw pi-shopping-cart">
+                    <f:param name="i" value="1"/>
+                </p:menuitem>
+            </p:tabMenu>
+        </div>
+        <h:form>
+            <p:dataGrid var="pro" value="#{ProductoC.listaProducto}" columns="3" layout="grid" id="productos" >
+
+                <f:facet name="header">
+                    Productos Registrados - DataGrid Primefaces
+<!--                    <p:button outcome="inicio.xhtml" value="Regresar" icon="pi pi-angle-left"></p:button>-->
+                </f:facet>
+
+                <p:panel header="#{pro.categoria}" style="text-align:center">
+                    <h:panelGrid columns="1" style="width:100%" >
+
+                        <!--                        <p:graphicImage name="/Image/{prod.imagen}.png"/> -->
+                        <img src="imagenes/#{pro.imagen}.png" height="80px"/>
+                        <h:outputText value="#{pro.nombre} #{pro.categoria}" style="font-weight: bold" />
+                        <p:spacer height="10 px"/>
+                        <h:outputText value="#{pro.descripcion}" />
+                        <p:spacer height="10 px"/>
+                        <h:outputText value="Precio : s/. #{pro.precio}" id="txtPrecio"/>
+                        <p:spacer height="10 px"/>
+                    </h:panelGrid>
+                    
+                    <!--<p:commandButton value="Eliminar" action="#{ProductoC.eliminar(pro.codigo)}" update="mensaje" icon="pi pi-save"/>-->
+                </p:panel>
+
+            </p:dataGrid>
+        </h:form>
+    </h:body>
+</html>

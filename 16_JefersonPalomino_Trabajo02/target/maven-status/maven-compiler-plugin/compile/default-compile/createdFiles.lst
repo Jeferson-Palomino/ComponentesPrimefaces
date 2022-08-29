@@ -1,0 +1,7 @@
+controlador\ProductoC.class
+com\mycompany\_jefersonpalomino_trabajo02\JAXRSConfiguration.class
+dao\Conexion.class
+dao\ICRUD.class
+modelo\Producto.class
+dao\ProductoImpl.class
+com\mycompany\_jefersonpalomino_trabajo02\resources\JavaEE8Resource.class
