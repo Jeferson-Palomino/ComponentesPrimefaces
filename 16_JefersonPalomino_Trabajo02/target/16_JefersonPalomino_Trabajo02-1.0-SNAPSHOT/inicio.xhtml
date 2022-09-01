@@ -5,14 +5,18 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:fn="http://java.sun.com/jsp/jstl/functions">
     <h:head>
         <title>Demo</title>
+        <script src="https://kit.fontawesome.com/8133a37c30.js" crossorigin="anonymous"></script>
+        <f:event listener="#{ProductoC.listar()}" type="preRenderView"/>
     </h:head>
     <h:body>
 
-        <p:growl id="mensaje" severity="info, error" showDetail="true" showSummary="true" />
+        <p:growl id="mensaje" severity="info, error,warn" showDetail="true" showSummary="true" />
         <div class="card">
+            <h5>Tab Menu</h5>
             <p:tabMenu activeIndex="#{param.i}">
                 <p:menuitem value="Home" outcome="inicio.xhtml" icon="pi pi-fw pi-home">
                     <f:param name="i" value="0"/>
@@ -22,32 +26,193 @@
                 </p:menuitem>
             </p:tabMenu>
         </div>
+        <p:separator/>
+        <div class="card">
+            <h:form>
+                <h5>Horizontal</h5>
+                <p:megaMenu orientation="horizontal" autoDisplay="false">
+                    <p:submenu label="Videos" icon="pi pi-fw pi-video">
+                        <p:column>
+                            <p:submenu label="Video 1">
+                                <p:menuitem value="Video 1.1" />
+                            </p:submenu>
+                            <p:submenu label="Video 2">
+                                <p:menuitem value="Video 2.1"/>
+                            </p:submenu>
+                        </p:column>
+                    </p:submenu>
+
+                    <p:submenu label="Users" icon="pi pi-fw pi-users">
+
+                        <p:column>
+                            <p:submenu label="User 1">
+                                <p:menuitem value="User 1.1"/>
+                            </p:submenu>
+                            <p:submenu label="User 2">
+                                <p:menuitem value="User 2.1"/>
+                            </p:submenu>
+                        </p:column>
+                    </p:submenu>
+
+                    <p:submenu label="Events" icon="pi pi-fw pi-calendar">
+                        <p:column>
+                            <p:submenu label="Event 1">
+                                <p:menuitem value="Event 1.1"/>
+                                <p:menuitem value="Event 1.2"/>
+                            </p:submenu>
+                        </p:column>
+                    </p:submenu>
+
+                    <p:submenu label="Settings" icon="pi pi-fw pi-cog">
+                        <p:column>
+                            <p:submenu label="Setting 1">
+                                <p:menuitem value="Setting 1.1"/>
+                                <p:menuitem value="Setting 1.2"/>
+                            </p:submenu>
+                            <p:submenu label="Setting 2">
+                                <p:menuitem value="Setting 2.1"/>
+                                <p:menuitem value="Setting 2.2"/>
+                            </p:submenu>
+                        </p:column>
+                    </p:submenu>
+                </p:megaMenu>
+                <p:separator/>
+                <h5>Vertical</h5>
+                <p:megaMenu orientation="vertical" autoDisplay="false">
+                    <p:submenu label="Videos" icon="pi pi-fw pi-video">
+                        <p:column>
+                            <p:submenu label="Video 1">
+                                <p:menuitem value="Video 1.1"/>
+                                <p:menuitem value="Video 1.2"/>
+                            </p:submenu>
+                            <p:submenu label="Video 2">
+                                <p:menuitem value="Video 2.1"/>
+                                <p:menuitem value="Video 2.2"/>
+                            </p:submenu>
+                        </p:column>
+                    </p:submenu>
+
+                    <p:submenu label="Users" icon="pi pi-fw pi-users">
+
+                        <p:column>
+                            <p:submenu label="User 1">
+                                <p:menuitem value="User 1.1"/>
+                                <p:menuitem value="User 1.2" url="#"/>
+                            </p:submenu>
+                            <p:submenu label="User 2">
+                                <p:menuitem value="User 2.1" url="#"/>
+                                <p:menuitem value="User 2.2" url="#"/>
+                            </p:submenu>
+                        </p:column>
+                    </p:submenu>
+
+                    <p:submenu label="Events" icon="pi pi-fw pi-calendar">
+                        <p:column>
+                            <p:submenu label="Event 1">
+                                <p:menuitem value="Event 1.1" url="#"/>
+                                <p:menuitem value="Event 1.2" url="#"/>
+                            </p:submenu>
+                            <p:submenu label="Event 2">
+                                <p:menuitem value="Event 2.1" url="#"/>
+                                <p:menuitem value="Event 2.2" url="#"/>
+                            </p:submenu>
+                        </p:column>
+                    </p:submenu>
+
+                    <p:submenu label="Settings" icon="pi pi-fw pi-cog">
+                        <p:column>
+                            <p:submenu label="Setting 1">
+                                <p:menuitem value="Setting 1.1" url="#"/>
+                                <p:menuitem value="Setting 1.2" url="#"/>
+                            </p:submenu>
+                            <p:submenu label="Setting 2">
+                                <p:menuitem value="Setting 2.1" url="#"/>
+                                <p:menuitem value="Setting 2.2" url="#" />
+                            </p:submenu>
+                        </p:column>
+                    </p:submenu>
+                </p:megaMenu>
+            </h:form>
+        </div>
+        <p:separator/>
+
+
         <h:form>
-            <h3>button</h3>
-            <p:button value="ir a producto" outcome="productos.xhtml" icon="pi pi-shopping-cart" style="margin-right: 20px">
-                <f:param name="i" value="1"/>
-            </p:button>
             <p:separator/>
-            <h3>link</h3>
-            <p:link outcome="productos.xhtml" value="Ir a producto" >
-                <f:param name="i" value="1"/>
-            </p:link>
+            <h5>Mensajes</h5>
+            <p:commandButton value="Mensaje info" action="#{ProductoC.botonPrueba()}" icon="pi pi-spin pi-spinner" update="mensaje" styleClass="mr-2" style="width: 10rem"/>
+            <p:spacer width="20"/>
+            <p:commandButton actionListener="#{ProductoC.warn()}" update="mensaje" icon="pi pi-spin pi-spinner" value="Mensaje warn" styleClass="mr-2 ui-button-warning" style="width: 10rem" />
+            <p:spacer width="20"/>
+            <p:commandButton value="Mensaje error" action="#{ProductoC.delete()}" icon="pi pi-spin pi-spinner" update="mensaje" styleClass="ui-button-danger" style="width: 10rem"/>
             <p:separator/>
-            <h3>commandButton</h3>
-            <p:commandButton value="Producto" action="#{ProductoC.botonPrueba()}" icon="pi pi-home" update="mensaje"/>
-            <p:separator/>
-            <h3>linkButton</h3>
-            <p:linkButton outcome="productos.xhtml" value="Producto" icon="pi pi-spin pi-spinner">
-                <f:param name="i" value="1"/>
-            </p:linkButton>
-            <p:separator/>
-            <h3>commandLink</h3>
-            <p:commandLink value="Producto" action="#{ProductoC.botonPrueba()}" update="mensaje"/>
-            <h3>splitButton</h3>
-            <p:splitButton value="Guardar" action="#{ProductoC.save()}" update="mensaje" icon="pi pi-save">
-                <p:menuitem value="actualizar" action="#{ProductoC.update()}" update="mensaje" icon="pi pi-refresh" />
-                <p:menuitem value="eliminar" action="#{ProductoC.delete()}" ajax="false" icon="pi pi-times" />
-            </p:splitButton> 
         </h:form>
+        <h:form>
+            <p:separator/>
+            <h5>Dialog Framework</h5>
+            <p:commandButton value="Ver productos" icon="pi pi-eye" oncomplete="PF('dialogProducto').show()"/>
+            <p:separator/>
+        </h:form>
+        <h:form>
+            <h5>Primefaces Icons</h5>
+            <i class="pi pi-facebook"></i>
+            <p:spacer width="20"/>
+            <i class="pi pi-github"></i>
+            <p:spacer width="20"/>
+            <i class="pi pi-twitter"></i>
+            <p:spacer width="20"/>
+            <i class="pi pi-paypal"></i>
+            <p:spacer width="20"/>
+            <i class="pi pi-amazon"></i>
+            <p:spacer width="20"/>
+            <i class="pi pi-discord"></i>
+            <p:spacer width="20"/>
+            <i class="pi pi-trash"></i>
+            <p:spacer width="20"/>
+            <i class="pi pi-save"></i>
+            <p:spacer width="20"/>
+            <i class="pi pi-desktop"></i>
+            <p:spacer width="20"/>
+            <i class="pi pi-file-pdf"></i>
+            <p:spacer width="20"/>
+            <i class="pi pi-user"></i>
+            <p:spacer width="20"/>
+            <i class="pi pi-users"></i>
+        </h:form>
+        <p:separator/>
+        <h:form>
+            <h5>fontAwesome Icons</h5>
+            <i class="fa-solid fa-users"></i>
+        </h:form>
+
+
+
+
+        <p:dialog header="Productos" id="Productos" widgetVar="dialogProducto" width="800" showEffect="fade" modal="true">
+            <h:form id="Registro_Producto">
+                <p:dataTable id="availableProducts" var="product" value="#{ProductoC.listaProducto}">
+                    
+
+                    <p:column headerText="categoria">
+                        <h:outputText value="#{product.categoria}"/>
+                    </p:column>
+
+                    <p:column headerText="Nombre">
+                        <h:outputText value="#{product.nombre}"/>
+                    </p:column>
+
+                    <p:column headerText="Descripcion">
+                        <h:outputText value="#{product.descripcion}"/>
+                    </p:column>
+
+                    <p:column headerText="Precio">
+                        <h:outputText value="#{product.precio}"/>
+                    </p:column>
+                    <p:column headerText="Stock">
+                        <h:outputText value="#{product.stock}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </p:dialog>
     </h:body>
 </html>

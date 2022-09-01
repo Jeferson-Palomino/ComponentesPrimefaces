@@ -50,29 +50,17 @@ public class ProductoC implements Serializable{
             System.out.println("Error en listarC: " +e.getMessage());
         }
     }
-    
-    public void save(){
-        addMessage("Se guardo correctamente");
+    public void warn(){
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Cuidado","lee con atencion"));
     }
-    
-    public void update(){
-        addMessage("Se actualizo correctamente");
-    }
-    
     public void delete(){
-        addMessage("Se elimino correctamente");
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","No se pudo eliminar el producto"));
     }
     
     public void botonPrueba(){
-        addMessage("Bienvenido a Primefaces");
-//        FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"Hola","Bienvenido a Primefaces"));
+        FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"OK","Bienvenido a Primefaces"));
     } 
     
-    public void addMessage(String summary) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
-        FacesContext.getCurrentInstance().addMessage(null, message);
-    }
-
     public Producto getPro() {
         return pro;
     }
